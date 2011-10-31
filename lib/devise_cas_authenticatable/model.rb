@@ -27,9 +27,7 @@ module Devise
           puts "ticket = #{ticket.inspect}"
 
           if ticket.is_valid?
-            
-            conditions = {::Devise.cas_username_column => ticket.response.user}
-
+            conditions = {::Devise.cas_username_column => ticket.respond_to?(:user) ? ticket.user : ticket.response.user} 
             # We don't want to override Devise 1.1's find_for_authentication
             resource = if respond_to?(:find_for_authentication)
               find_for_authentication(conditions)
