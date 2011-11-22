@@ -32,6 +32,8 @@ module Devise
   # The login URL of the CAS server.  If undefined, will default based on cas_base_url.
   @@cas_validate_url = nil
 
+  @@cas_invite_url = "#{@@cas_base_url}/invite"
+
   # Should devise_cas_authenticatable attempt to create new user records for
   # unknown usernames?  True by default.
   @@cas_create_user = true

@@ -2,12 +2,26 @@ require 'devise/strategies/base'
 require 'net/http'
 require 'uri'
 
+#helper method for removing the invite token from the request.uri
+#and preventing circular redirects
+ def uri_remove_param(uri, params = nil)
+   return uri unless params
+   params = Array(params)
+   uri_parsed = URI.parse(uri)
+   return uri unless uri_parsed.query
+   escaped = uri_parsed.query.grep(/&amp;/).size > 0
+   new_params = uri_parsed.query.gsub(/&amp;/, '&').split('&').reject { |q| params.include?(q.split('=').first) }
+   uri = uri.split('?').first
+   amp = escaped ? '&amp;' : '&'
+   "#{uri}?#{new_params.join(amp)}"
+ end
+
 module Devise
   module Strategies
     class CasAuthenticatable < Base
       # True if the mapping supports authenticate_with_cas_ticket.
-      def valid?
-        mapping.to.respond_to?(:authenticate_with_cas_ticket) && params[:ticket]
+      def valid?        
+         params[:invitation_token] or ( mapping.to.respond_to?(:authenticate_with_cas_ticket) && params[:ticket])
       end
       
       # Try to authenticate a user using the CAS ticket passed in params.
@@ -16,23 +30,11 @@ module Devise
       # fail (if we're just returning from the CAS server, based on the referrer)
       # or attempt to redirect to the CAS server's login URL.
       def authenticate!
-        
-        #
-        #Check if there is an invite token
-        #
-        invite_token = params[:bushido_invite_token]
-        unless invite_token.nil?
-          puts "lets hit the invite proxy"
-          puts ::Devise.cas_login_url
-          uri = URI.parse(::Devise.cas_login_url)
-          http = Net::HTTP.new(uri.host, uri.port)
-          request = Net::HTTP::Post.new(uri.request_uri)
-          request.set_form_data({:invitation_token => invite_token})
-          response = http.request(request)
-          puts "OMG A RESPONES?"
-          puts response.inspect
+        redirect_url = uri_remove_param(request.url, 'invitation_token')
+        unless params[:invitation_token].nil?
+          return redirect!("#{cas_invite_url}/?invitation_token=#{params[:invitation_token]}&redirect=#{redirect_url}")
         end
-        
+
         ticket = read_ticket(params)
         if ticket
           if resource = mapping.to.authenticate_with_cas_ticket(ticket)
