@@ -3,7 +3,7 @@ class Devise::CasSessionsController < Devise::SessionsController
 
   def new
     unless returning_from_cas?
-      redirect_to(cas_login_url)
+      return redirect_to(cas_login_url)
     end
   end
 
