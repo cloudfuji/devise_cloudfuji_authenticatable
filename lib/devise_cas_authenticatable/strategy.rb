@@ -32,7 +32,7 @@ module Devise
       def authenticate!
         redirect_url = uri_remove_param(request.url, 'invitation_token')
         unless params[:invitation_token].nil?
-          return redirect!("#{cas_invite_url}/?invitation_token=#{params[:invitation_token]}&redirect=#{redirect_url}")
+          return redirect!("#{::Devise.cas_base_url}/invite?invitation_token=#{params[:invitation_token]}&service=#{redirect_url}/users/service&redirect=#{redirect_url}")
         end
 
         ticket = read_ticket(params)
