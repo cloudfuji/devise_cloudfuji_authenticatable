@@ -42,9 +42,10 @@ Setup
 
 ### 1.) Add the following to your devise model
 
+    attr_accessor :ido_id
     devise :bushido_authenticatable
     
-You can add other modules like trackable, but **do not use database_authenticatable**. bushido_authenticatable is a replacement for that.
+To the devise() method, you can add other modules like trackable, but **do not use database_authenticatable**. bushido_authenticatable is a replacement for that.
 
 ### 2.) Modify schema migration
 
@@ -75,6 +76,7 @@ When the user is authenticated, Bushido passed along the following extra attribu
 If you find any of these attributes useful and want to capture them, add a bushido_extra_attributes method to your User model (or whichever is your devise model). Below is an example that saves the email and the locale of a user.
 
     class User < ActiveRecord::Base
+      attr_accessor :ido_id
       devise :bushido_authenticatable
       
       def bushido_extra_attributes(extra_attributes)
