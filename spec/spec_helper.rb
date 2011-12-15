@@ -10,7 +10,7 @@ require 'sham_rack'
 require 'capybara/rspec'
 
 RSpec.configure do |config| 
-  config.mock_with :mocha 
+  config.mock_with :rspec 
 end
 
 ShamRack.at('www.example.com') do |env|
