@@ -2,6 +2,7 @@ ENV["RAILS_ENV"] = "test"
 $:.unshift File.dirname(__FILE__)
 $:.unshift File.expand_path('../../lib', __FILE__)
 
+require "devise_bushido_authenticatable"
 require "scenario/config/environment"
 require "rails/test_help"
 require 'rspec/rails'
@@ -9,7 +10,7 @@ require 'sham_rack'
 require 'capybara/rspec'
 
 RSpec.configure do |config| 
-  config.mock_with :mocha 
+  config.mock_with :rspec 
 end
 
 ShamRack.at('www.example.com') do |env|
