@@ -73,12 +73,8 @@ class Devise::CasSessionsController < Devise::SessionsController
 
   def destroy_cas_session(session_id, session_index)
     if session_store && session_store.respond_to?(:destroy)
-      user_session = session_store.find_by_session_id session_id
-      if user_session.destroy
-        logger.info "Destroyed session #{session_id} corresponding to service ticket #{session_index}."
-      else
-        logger.info "Data for session #{session_id} was not found. It may have already been cleared by a local CAS logout request."
-      end
+      user_session = session_store.find_by_session_id(session_id)
+      user_session.destroy if user_session
     else
       logger.info "A single sign out request was received for ticket #{session_index} but the Rails session_store is not a type supported for single-sign-out by devise_cas_authenticatable."
     end
