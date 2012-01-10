@@ -12,12 +12,22 @@ require 'devise_cas_authenticatable/exceptions'
 require 'devise_cas_authenticatable/missing_session_helpers'
 require 'devise_cas_authenticatable/single_sign_out'
 
-ActiveSupport.on_load(:action_controller) do
-  include MissingSessionHelpers
-end
+if ActiveSupport.respond_to? :on_load
+  ActiveSupport.on_load(:action_controller) do
+    include MissingSessionHelpers
+  end
 
-ActiveSupport.on_load(:action_view) do
-  include MissingSessionHelpers
+  ActiveSupport.on_load(:action_view) do
+    include MissingSessionHelpers
+  end
+else
+  ActionController.instance_eval do
+    include MissingSessionHelpers
+  end
+  
+  ActionView.instance_eval do
+    include MissingSessionHelpers
+  end
 end
 
 if defined?(ActiveRecord::SessionStore)
