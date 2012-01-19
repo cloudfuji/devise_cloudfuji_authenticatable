@@ -74,7 +74,11 @@ class Devise::CasSessionsController < Devise::SessionsController
   end
   
   def session_store
-    @session_store ||= (Rails.respond_to?(:application) && Rails.application.config.session_store.session_class)
+    if ::Rails.respond_to? :application
+      return @session_store ||= Rails.application.config.session_store.session_class
+    elsif ::ActionController::Base.respond_to? :session_store
+      return @session_store ||= ActionController::Base.session_store.session_class
+    end
   end
 
   def returning_from_cas?
