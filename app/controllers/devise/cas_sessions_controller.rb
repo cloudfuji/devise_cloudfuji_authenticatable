@@ -1,19 +1,12 @@
 class Devise::CasSessionsController < Devise::SessionsController
-  unloadable
 
   def new
-    unless returning_from_cas?
-      redirect_to(cas_login_url)
-    end
+    redirect_to(cas_login_url) unless returning_from_cas?
   end
 
   def service
     warden.authenticate!(:scope => resource_name)
-
-    if params[:redirect]
-      return redirect_to params[:redirect]
-    end
-
+    return redirect_to params[:redirect] if params[:redirect]
     return redirect_to after_sign_in_path_for(resource_name)
   end
 
@@ -39,7 +32,6 @@ class Devise::CasSessionsController < Devise::SessionsController
   def single_sign_out
     if ::Devise.cas_enable_single_sign_out
       session_index = read_session_index
-      puts "SESSION INDEX #{read_session_index}"
       if session_index
         logger.info "Intercepted single-sign-out request for CAS session #{session_index}."
         session_id = ::DeviseCasAuthenticatable::SingleSignOut::Strategies.current_strategy.find_session_id_by_index(session_index)
@@ -54,7 +46,7 @@ class Devise::CasSessionsController < Devise::SessionsController
     render :nothing => true
   end
 
-  private
+  protected
 
   def read_session_index
     if request.headers['CONTENT_TYPE'] =~ %r{^multipart/}
@@ -68,8 +60,12 @@ class Devise::CasSessionsController < Devise::SessionsController
   end
 
   def destroy_cas_session(session_id, session_index)
-    if session_store && session_store.respond_to?(:destroy)
-      user_session = session_store.find_by_session_id(session_id)
+    if session_store && session_store.new.respond_to?(:destroy)
+      if session_store.respond_to? :find_by_session_id
+        user_session = session_store.find_by_session_id(session_id)
+      elsif session_store.respond_to? :find
+        user_session = session_store.find(session_id)
+      end
       user_session.destroy if user_session
     else
       logger.info "A single sign out request was received for ticket #{session_index} but the Rails session_store is not a type supported for single-sign-out by devise_cas_authenticatable."
@@ -78,7 +74,11 @@ class Devise::CasSessionsController < Devise::SessionsController
   end
   
   def session_store
-  	@session_store ||= (Rails.respond_to?(:application) && Rails.application.config.session_store.session_class)
+    if ::Rails.respond_to? :application
+      return @session_store ||= Rails.application.config.session_store.session_class
+    elsif ::ActionController::Base.respond_to? :session_store
+      return @session_store ||= ActionController::Base.session_store.session_class
+    end
   end
 
   def returning_from_cas?
