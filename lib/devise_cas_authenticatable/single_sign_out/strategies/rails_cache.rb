@@ -9,7 +9,7 @@ module DeviseCasAuthenticatable
 
         def find_session_id_by_index(session_index)
           sid = Rails.cache.read(cache_key(session_index))
-          logger.debug("Found session id #{sid.inspect} for index #{session_index}")
+          logger.debug("Found session id #{sid.inspect} for index #{session_index.inspect}")
           sid
         end
         

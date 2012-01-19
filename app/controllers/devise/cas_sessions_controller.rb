@@ -60,7 +60,7 @@ class Devise::CasSessionsController < Devise::SessionsController
   end
 
   def destroy_cas_session(session_id, session_index)
-    if session_store && session_store.respond_to?(:destroy)
+    if session_store && session_store.new.respond_to?(:destroy)
       if session_store.respond_to? :find_by_session_id
         user_session = session_store.find_by_session_id(session_id)
       elsif session_store.respond_to? :find
