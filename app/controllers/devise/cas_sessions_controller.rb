@@ -61,7 +61,11 @@ class Devise::CasSessionsController < Devise::SessionsController
 
   def destroy_cas_session(session_id, session_index)
     if session_store && session_store.respond_to?(:destroy)
-      user_session = session_store.find_by_session_id(session_id)
+      if session_store.respond_to? :find_by_session_id
+        user_session = session_store.find_by_session_id(session_id)
+      elsif session_store.respond_to? :find
+        user_session = session_store.find(session_id)
+      end
       user_session.destroy if user_session
     else
       logger.info "A single sign out request was received for ticket #{session_index} but the Rails session_store is not a type supported for single-sign-out by devise_cas_authenticatable."
@@ -70,7 +74,7 @@ class Devise::CasSessionsController < Devise::SessionsController
   end
   
   def session_store
-  	@session_store ||= (Rails.respond_to?(:application) && Rails.application.config.session_store.session_class)
+    @session_store ||= (Rails.respond_to?(:application) && Rails.application.config.session_store.session_class)
   end
 
   def returning_from_cas?
