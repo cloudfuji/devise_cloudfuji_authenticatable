@@ -22,7 +22,10 @@ module Devise
         if resource = mapping.to.authenticate_with_cas_ticket(ticket)
           # Store the ticket in the session for later usage
           if ::Devise.cas_enable_single_sign_out
+            puts "SINGLE SIGNOUT ENABLED"
             session['cas_last_valid_ticket'] = ticket.ticket
+            puts "LAST VALID TICKET: #{ticket.ticket.inspect}"
+            puts "LAST VALID TICKET PARENT: #{ticket.inspect}"
             session['cas_last_valid_ticket_store'] = true
           end
 
