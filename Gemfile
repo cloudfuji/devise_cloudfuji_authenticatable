@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gemspec :name => "devise_bushido_authenticatable"
+# Specify your gem's dependencies in devise_bushido_authenticatable.gemspec
+gemspec
 
 group :test do
   gem "rails", ">= 2.3"

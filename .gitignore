@@ -1,9 +1,4 @@
-.bundle/*
-.idea/*
-.yardoc/*
+*.gem
+.bundle
+Gemfile.lock
 pkg/*
-spec/scenario/db/*.sqlite3
-spec/scenario/tmp/*
-log/*
-db/*
-*.swp
