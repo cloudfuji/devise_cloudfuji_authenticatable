@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    devise_bushido_authenticatable (1.0.1)
+    devise_bushido_authenticatable (1.0.2)
       devise (= 1.1.9)
       rubycas-client (>= 2.2.1)
 
