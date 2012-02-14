@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
-  s.add_runtime_dependency(%q<devise>, ["= 1.1.9"])
+  s.add_runtime_dependency(%q<devise>, ["= 1.5.3"])
   s.add_runtime_dependency(%q<rubycas-client>, [">= 2.2.1"])
 
   s.add_development_dependency("rspec")
