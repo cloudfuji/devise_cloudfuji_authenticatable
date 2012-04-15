@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    devise_cloudfuji_authenticatable (1.0.3)
+    devise_cloudfuji_authenticatable (1.0.4)
       devise (= 1.5.3)
       rubycas-client (>= 2.2.1)
 
@@ -169,7 +169,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
-    warden (1.1.0)
+    warden (1.1.1)
       rack (>= 1.0)
     xpath (0.1.4)
       nokogiri (~> 1.3)
