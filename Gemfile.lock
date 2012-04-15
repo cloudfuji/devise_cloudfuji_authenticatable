@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    devise_bushido_authenticatable (1.0.3)
+    devise_cloudfuji_authenticatable (1.0.3)
       devise (= 1.5.3)
       rubycas-client (>= 2.2.1)
 
@@ -181,7 +181,7 @@ DEPENDENCIES
   capybara
   castronaut!
   crypt-isaac
-  devise_bushido_authenticatable!
+  devise_cloudfuji_authenticatable!
   launchy
   mocha
   pry

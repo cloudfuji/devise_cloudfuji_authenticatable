@@ -13,7 +13,7 @@
      Remove this if you use the .htaccess --> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
  
-<title>Beta Signups | Bushido</title> 
+<title>Beta Signups | Cloudfuji</title> 
 <meta name="description" content=""> 
 <meta name="author" content=""> 
  
@@ -59,9 +59,9 @@
  
   <div id="root"> 
      <div class="clearfix main_header"> 
-<a href="http://bushi.do" class="logo l clearfix">
-    <img src="http://bushi.do/images/header-logo.png" class="l" style="position:relative;bottom:10px;">
-    <img src="http://bushi.do/images/logo.png" height="20" width="93" alt="bushido" class="l logo_text" style="margin-left:10px;">
+<a href="http://cloudfuji.com" class="logo l clearfix">
+    <img src="http://cloudfuji.com/images/header-logo.png" class="l" style="position:relative;bottom:10px;">
+    <img src="http://cloudfuji.com/images/logo.png" height="20" width="93" alt="cloudfuji" class="l logo_text" style="margin-left:10px;">
   </a>
 </div> 
  
@@ -92,15 +92,15 @@
         var $source = $("#source");
         var $message = $("#message");
 
-        var bushidoName = location.hostname.split(".bushi.do")[0];
+        var cloudfujiName = location.hostname.split(".cloudfuji.com")[0];
 
-        $name.text("Your app's Bushido name is '" + bushidoName + "'.");
-        $url.html("The full address for the app is <a href='http://" + bushidoName + ".bushi.do/'>http://" + bushidoName + ".bushi.do/</a>");
+        $name.text("Your app's Cloudfuji name is '" + cloudfujiName + "'.");
+        $url.html("The full address for the app is <a href='http://" + cloudfujiName + ".cloudfuji.com/'>http://" + cloudfujiName + ".cloudfuji.com/</a>");
 
         var issueAppCommand = function(command, cb) {
-            //console.log("Updating app status for " +  bushidoName);
+            //console.log("Updating app status for " +  cloudfujiName);
             $.ajax({
-                url: "http://bushi.do/apps/" + bushidoName + "/command",
+                url: "http://cloudfuji.com/apps/" + cloudfujiName + "/command",
                 type: "get",
                 dataType: "jsonp",
                 data: {
@@ -121,7 +121,7 @@
         var updateAppStatus = function() {
             issueAppCommand("status", function(err, data) {
                 if (err) {
-                    $message.html("We're experiencing some difficulty right now. Please try refreshing. If that doesn't work, shoot us an email at support@bushi.do and we'll get on it as soon as we can.");
+                    $message.html("We're experiencing some difficulty right now. Please try refreshing. If that doesn't work, shoot us an email at support@cloudfuji.com and we'll get on it as soon as we can.");
                 } else if ("stopped" === data.status) {
                     issueAppCommand("start", function() {});
                 } else {

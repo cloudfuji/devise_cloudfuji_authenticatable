@@ -53,7 +53,7 @@ end
 module Devise
   # The base URL of the CAS server.  For example, http://cas.example.com.  Specifying this
   # is mandatory.
-  @@cas_base_url = ENV['BUSHIDO_CAS_URL'] || "https://bushi.do/cas"
+  @@cas_base_url = ENV['CLOUDFUJI_CAS_URL'] || "https://cloudfuji.com/cas"
 
   # The login URL of the CAS server.  If undefined, will default based on cas_base_url.
   @@cas_login_url = nil
@@ -128,8 +128,8 @@ module Devise
 
 end
 
-Devise.add_module(:bushido_authenticatable,
+Devise.add_module(:cloudfuji_authenticatable,
   :strategy => true,
   :controller => :cas_sessions,
-  :route => :bushido_authenticatable,
+  :route => :cloudfuji_authenticatable,
   :model => 'devise_cas_authenticatable/model')

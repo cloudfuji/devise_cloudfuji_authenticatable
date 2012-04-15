@@ -1,9 +1,9 @@
 require "spec_helper"
 
-describe Devise::Models::BushidoAuthenticatable do
+describe Devise::Models::CloudfujiAuthenticatable do
   
   class ExampleAuth
-    include Devise::Models::BushidoAuthenticatable
+    include Devise::Models::CloudfujiAuthenticatable
   end
   
   describe "authenticate_with_cas_ticket" do
@@ -21,16 +21,16 @@ describe Devise::Models::BushidoAuthenticatable do
       @user.should_receive(:save)
     end
     
-    it "should call the bushido_extra_attributes method if it's defined on the devise resource" do
+    it "should call the cloudfuji_extra_attributes method if it's defined on the devise resource" do
       @ticket.should_receive(:extra_attributes)
-      @user.should_receive(:bushido_extra_attributes)
+      @user.should_receive(:cloudfuji_extra_attributes)
       ExampleAuth.authenticate_with_cas_ticket(@ticket)
     end
 
-    it "should *not* call the bushido_extra_attributes method if it's *not* defined on the devise resource" do
+    it "should *not* call the cloudfuji_extra_attributes method if it's *not* defined on the devise resource" do
 
       @user.should_receive(:respond_to?).and_return(false)      
-      @user.should_not_receive(:bushido_extra_attributes)
+      @user.should_not_receive(:cloudfuji_extra_attributes)
 
       ExampleAuth.authenticate_with_cas_ticket(@ticket)
     end

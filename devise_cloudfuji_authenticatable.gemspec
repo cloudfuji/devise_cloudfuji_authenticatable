@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "devise_bushido_authenticatable/version"
+require "devise_cloudfuji_authenticatable/version"
 
 Gem::Specification.new do |s|
-  s.name        = "devise_bushido_authenticatable"
-  s.version     = DeviseBushidoAuthenticatable::VERSION
+  s.name        = "devise_cloudfuji_authenticatable"
+  s.version     = DeviseCloudfujiAuthenticatable::VERSION
   s.authors     = ["Akash Manohar J", "Sean Grove", "Didier Lafforgue"]
-  s.email       = "s@bushi.do"
-  s.homepage    = "http://github.com/bushido/bushido_cas_authenticatable"
-  s.summary     = %q{Bushido SSO authentication module for Devise}
-  s.description = %q{Bushido SSO authentication module for Devise. A slight variant of the excellent work from Nat Budlin on devise_cas_authenticatable.}
+  s.email       = "s@cloudfuji.com"
+  s.homepage    = "http://github.com/cloudfuji/cloudfuji_cas_authenticatable"
+  s.summary     = %q{Cloudfuji SSO authentication module for Devise}
+  s.description = %q{Cloudfuji SSO authentication module for Devise. A slight variant of the excellent work from Nat Budlin on devise_cas_authenticatable.}
 
-  s.rubyforge_project = "devise_bushido_authenticatable"
+  s.rubyforge_project = "devise_cloudfuji_authenticatable"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

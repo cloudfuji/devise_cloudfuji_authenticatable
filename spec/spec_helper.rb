@@ -2,7 +2,7 @@ ENV["RAILS_ENV"] = "test"
 $:.unshift File.dirname(__FILE__)
 $:.unshift File.expand_path('../../lib', __FILE__)
 
-require "devise_bushido_authenticatable"
+require "devise_cloudfuji_authenticatable"
 require "scenario/config/environment"
 require "rails/test_help"
 require 'rspec/rails'

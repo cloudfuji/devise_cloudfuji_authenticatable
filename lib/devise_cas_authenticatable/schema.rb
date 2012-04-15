@@ -2,7 +2,7 @@ require 'devise/schema'
 
 module Devise
   module Schema
-    def bushido_authenticatable
+    def cloudfuji_authenticatable
       if respond_to? :apply_devise_schema
         apply_devise_schema :ido_id, String
       else

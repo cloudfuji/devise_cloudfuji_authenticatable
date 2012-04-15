@@ -53,4 +53,4 @@ module Devise
   end
 end
 
-Warden::Strategies.add(:bushido_authenticatable, Devise::Strategies::CasAuthenticatable)
+Warden::Strategies.add(:cloudfuji_authenticatable, Devise::Strategies::CasAuthenticatable)

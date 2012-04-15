@@ -4,7 +4,7 @@ if defined?(ActionDispatch)
   ActionDispatch::Routing::Mapper.class_eval do
     protected
   
-    def devise_bushido_authenticatable(mapping, controllers)
+    def devise_cloudfuji_authenticatable(mapping, controllers)
       # service endpoint for CAS server
       get "service", :to => "#{controllers[:cas_sessions]}#service", :as => "service"
       post "service", :to => "#{controllers[:cas_sessions]}#single_sign_out", :as => "single_sign_out"
@@ -23,7 +23,7 @@ else
   ActionController::Routing::RouteSet::Mapper.class_eval do
     protected
 
-    def bushido_authenticatable(routes, mapping)
+    def cloudfuji_authenticatable(routes, mapping)
       routes.with_options(:controller => 'devise/cas_sessions', :name_prefix => nil) do |session|
         session.send(:"#{mapping.name}_service", '/service', :action => 'service', :conditions => {:method => :get})
         session.send(:"#{mapping.name}_service", '/service', :action => 'single_sign_out', :conditions => {:method => :post})

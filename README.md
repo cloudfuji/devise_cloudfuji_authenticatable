@@ -1,10 +1,10 @@
-devise_bushido_authenticatable
+devise_cloudfuji_authenticatable
 =======
 
-devise_bushido_authenticatable provides single sign-on support for Bushido applications, that use 
+devise_cloudfuji_authenticatable provides single sign-on support for Cloudfuji applications, that use 
 [Devise](http://github.com/plataformatec/devise) for authentication. It acts as a **replacement for the database_authenticatable option that devise provides**
 
-For applications running on Bushido, the authentication server provides the following user data:
+For applications running on Cloudfuji, the authentication server provides the following user data:
 
 * ido_id - a string that is unique to the user
 * email - user's email address
@@ -22,19 +22,19 @@ Requirements
 Installation
 ------------
 
-    gem install --pre devise_bushido_authenticatable
+    gem install --pre devise_cloudfuji_authenticatable
     
 ### Rails 3.x: Add the following to your Gemfile
 
     gem 'devise'
-    gem 'devise_bushido_authenticatable'
+    gem 'devise_cloudfuji_authenticatable'
 
 This has been tested with 3.1 rc5 too. So feel safe to use it :)
 
 ### Rails 2.3: Add the following in your config/environment.rb
     
     config.gem 'devise', :version => '~> 1.0.6'
-    config.gem 'devise_bushido_authenticatable'
+    config.gem 'devise_cloudfuji_authenticatable'
 
 
 Setup
@@ -43,19 +43,19 @@ Setup
 ### 1.) Add the following to your devise model
 
     attr_accessor :ido_id
-    devise :bushido_authenticatable
+    devise :cloudfuji_authenticatable
     
-To the devise() method, you can add other modules like trackable, but **do not use database_authenticatable**. bushido_authenticatable is a replacement for that.
+To the devise() method, you can add other modules like trackable, but **do not use database_authenticatable**. cloudfuji_authenticatable is a replacement for that.
 
 ### 2.) Modify schema migration
 
-Add the field required for the auth to work. For example, if the devise model is called User, add *bushido_authenticatable* to the schema like below.
+Add the field required for the auth to work. For example, if the devise model is called User, add *cloudfuji_authenticatable* to the schema like below.
 
     create_table :users do |t|
-      t.bushido_authenticatable
+      t.cloudfuji_authenticatable
     end
 
-That will add a string field called *ido_id*, which is unique to each Bushido user.
+That will add a string field called *ido_id*, which is unique to each Cloudfuji user.
 
 
 ### 3.) [OPTIONAL] Add ido_id to be indexed
@@ -66,20 +66,20 @@ That will add a string field called *ido_id*, which is unique to each Bushido us
 Extra attributes
 ----------------
 
-When the user is authenticated, Bushido passed along the following extra attributes:
+When the user is authenticated, Cloudfuji passed along the following extra attributes:
 
 * email - user's email address
 * first_name - user's first name
 * last_name - user's last name
 * locale - user's locale
 
-If you find any of these attributes useful and want to capture them, add a bushido_extra_attributes method to your User model (or whichever is your devise model). Below is an example that saves the email and the locale of a user.
+If you find any of these attributes useful and want to capture them, add a cloudfuji_extra_attributes method to your User model (or whichever is your devise model). Below is an example that saves the email and the locale of a user.
 
     class User < ActiveRecord::Base
       attr_accessor :ido_id
-      devise :bushido_authenticatable
+      devise :cloudfuji_authenticatable
       
-      def bushido_extra_attributes(extra_attributes)
+      def cloudfuji_extra_attributes(extra_attributes)
         extra_attributes.each do |name, value|
           case name.to_sym
           when :email

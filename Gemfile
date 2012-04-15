@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in devise_bushido_authenticatable.gemspec
+# Specify your gem's dependencies in devise_cloudfuji_authenticatable.gemspec
 gemspec
 
 group :test do
