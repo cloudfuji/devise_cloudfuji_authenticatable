@@ -5,9 +5,9 @@ require "devise_cloudfuji_authenticatable/version"
 Gem::Specification.new do |s|
   s.name        = "devise_cloudfuji_authenticatable"
   s.version     = DeviseCloudfujiAuthenticatable::VERSION
-  s.authors     = ["Akash Manohar J", "Sean Grove", "Didier Lafforgue"]
-  s.email       = "s@cloudfuji.com"
-  s.homepage    = "http://github.com/cloudfuji/cloudfuji_cas_authenticatable"
+  s.authors     = ["Sean Grove", "Didier Lafforgue"]
+  s.email       = "s@bushi.do"
+  s.homepage    = "http://github.com/cloudfuji/devise_cloudfuji_authenticatable"
   s.summary     = %q{Cloudfuji SSO authentication module for Devise}
   s.description = %q{Cloudfuji SSO authentication module for Devise. A slight variant of the excellent work from Nat Budlin on devise_cas_authenticatable.}
 
